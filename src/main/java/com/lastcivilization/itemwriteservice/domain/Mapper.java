@@ -1,5 +1,6 @@
 package com.lastcivilization.itemwriteservice.domain;
 
+import com.lastcivilization.itemwriteservice.domain.dto.CreateItemDto;
 import com.lastcivilization.itemwriteservice.domain.dto.DetailsDto;
 import com.lastcivilization.itemwriteservice.domain.dto.ItemDto;
 
@@ -24,8 +25,30 @@ class Mapper {
                 details.getDexterity(),
                 details.getDefense(),
                 details.getHealth(),
-                details.getTime()
+                details.getTime(),
+                details.getLvl()
         );
+    }
+
+    static Item toDomain(CreateItemDto createItemDto){
+        return Item.Builder.anItem()
+                .name(createItemDto.name())
+                .details(detailsToDomain(createItemDto))
+                .type(Type.valueOf(createItemDto.type()))
+                .build();
+    }
+
+    private static Details detailsToDomain(CreateItemDto createItemDto){
+        return Details.Builder.aDetails()
+                .resistance(createItemDto.resistance())
+                .damage(createItemDto.damage())
+                .strength(createItemDto.strength())
+                .dexterity(createItemDto.dexterity())
+                .defense(createItemDto.defense())
+                .health(createItemDto.health())
+                .time(createItemDto.time())
+                .lvl(createItemDto.lvl())
+                .build();
     }
 
     static Item toDomain(ItemDto itemDto){
@@ -47,6 +70,7 @@ class Mapper {
                 .defense(details.defense())
                 .health(details.health())
                 .time(details.time())
+                .lvl(details.lvl())
                 .build();
     }
 }

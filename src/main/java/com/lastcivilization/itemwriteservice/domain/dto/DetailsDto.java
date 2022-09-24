@@ -8,5 +8,6 @@ public record DetailsDto(
         int dexterity,
         int defense,
         int health,
-        int time
+        int time,
+        int lvl
 ) { }

@@ -1,6 +1,6 @@
 package com.lastcivilization.itemwriteservice.domain;
 
-class Details {
+public class Details {
 
     private Long id;
     private int resistance;
@@ -10,8 +10,9 @@ class Details {
     private int defense;
     private int health;
     private int time;
+    private int lvl;
 
-    public Details(Long id, int resistance, int damage, int strength, int dexterity, int defense, int health, int time) {
+    public Details(Long id, int resistance, int damage, int strength, int dexterity, int defense, int health, int time, int lvl) {
         this.id = id;
         this.resistance = resistance;
         this.damage = damage;
@@ -20,6 +21,7 @@ class Details {
         this.defense = defense;
         this.health = health;
         this.time = time;
+        this.lvl = lvl;
     }
 
     public Long getId() {
@@ -86,6 +88,14 @@ class Details {
         this.time = time;
     }
 
+    public int getLvl() {
+        return lvl;
+    }
+
+    public void setLvl(int lvl) {
+        this.lvl = lvl;
+    }
+
     public static final class Builder {
 
         private Long id;
@@ -96,6 +106,7 @@ class Details {
         private int defense;
         private int health;
         private int time;
+        private int lvl;
 
         private Builder() {
         }
@@ -144,8 +155,13 @@ class Details {
             return this;
         }
 
+        public Builder lvl(int lvl){
+            this.lvl = lvl;
+            return this;
+        }
+
         public Details build() {
-            return new Details(id, resistance, damage, strength, dexterity, defense, health, time);
+            return new Details(id, resistance, damage, strength, dexterity, defense, health, time, lvl);
         }
     }
 }

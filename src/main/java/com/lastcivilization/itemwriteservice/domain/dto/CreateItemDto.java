@@ -9,5 +9,6 @@ public record CreateItemDto(
         int defense,
         int health,
         int time,
+        int lvl,
         String type
 ) { }

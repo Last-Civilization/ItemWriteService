@@ -1,6 +1,6 @@
 package com.lastcivilization.itemwriteservice.domain;
 
-enum Type {
+public enum Type {
     HELMET,
     ARMOR,
     PANTS,

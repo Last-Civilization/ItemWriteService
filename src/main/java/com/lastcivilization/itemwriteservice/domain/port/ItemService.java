@@ -6,4 +6,5 @@ import com.lastcivilization.itemwriteservice.domain.dto.ItemDto;
 public interface ItemService {
 
     ItemDto createItem(CreateItemDto createItemDto);
+    ItemDto updateItem(ItemDto itemDto);
 }

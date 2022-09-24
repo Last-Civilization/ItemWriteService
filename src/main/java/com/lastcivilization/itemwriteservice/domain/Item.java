@@ -1,6 +1,6 @@
 package com.lastcivilization.itemwriteservice.domain;
 
-class Item {
+public class Item {
 
     private Long id;
     private String name;
