@@ -1,6 +1,8 @@
 package com.lastcivilization.itemwriteservice.domain.dto;
 
-public record CreateItemDto(
+import java.io.Serializable;
+
+public record CreateItemDto (
         String name,
         int resistance,
         int damage,

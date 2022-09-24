@@ -1,0 +1,84 @@
+package com.lastcivilization.itemwriteservice.infrastructure.application.rest;
+
+import com.lastcivilization.itemwriteservice.domain.dto.CreateItemDto;
+import com.lastcivilization.itemwriteservice.domain.dto.DetailsDto;
+import com.lastcivilization.itemwriteservice.domain.dto.ItemDto;
+import com.lastcivilization.itemwriteservice.utils.IntegrationBaseClass;
+import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+class ItemControllerTest extends IntegrationBaseClass {
+
+    @Test
+    void shouldCreateItem() throws Exception {
+        //given
+        CreateItemDto createItemDto = buildCreateItemDto();
+        //when
+        ResultActions createResult = mockMvc.perform(MockMvcRequestBuilders.post("/items")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(createItemDto)));
+        //then
+        createResult.andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.name").value("test"))
+                .andExpect(jsonPath("$.type").value("USE"))
+                .andExpect(jsonPath("$.details.id").exists())
+                .andExpect(jsonPath("$.details.resistance").value(1))
+                .andExpect(jsonPath("$.details.damage").value(1))
+                .andExpect(jsonPath("$.details.strength").value(1))
+                .andExpect(jsonPath("$.details.dexterity").value(1))
+                .andExpect(jsonPath("$.details.defense").value(1))
+                .andExpect(jsonPath("$.details.health").value(1))
+                .andExpect(jsonPath("$.details.time").value(1))
+                .andExpect(jsonPath("$.details.lvl").value(1));
+    }
+
+    private ItemDto buildItemDto(Long itemId, Long detailsId) {
+        return new ItemDto(
+                itemId,
+                "test",
+                new DetailsDto(
+                        detailsId,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                ),
+                "USE"
+        );
+    }
+
+    @NotNull
+    private static CreateItemDto buildCreateItemDto() {
+        return new CreateItemDto(
+                "test",
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                "USE"
+        );
+    }
+
+    @Test
+    void updateItem() {
+        //given
+        //when
+        //then
+    }
+}
