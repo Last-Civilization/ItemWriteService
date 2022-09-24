@@ -1,0 +1,92 @@
+databaseChangeLog:
+  - changeSet:
+      id: DB-SCHEMA
+      author: mrrevo
+      changes:
+        - createTable:
+            tableName: items
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: details
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: type
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: items_details
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: resistance
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: damage
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: strength
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: dexterity
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: defense
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: health
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lvl
+                  type: INT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: fk_items_details
+            baseTableName: items
+            baseColumnNames: details
+            referencedTableName: items_details
+            referencedColumnNames: id
+            onUpdate: CASCADE
+            onDelete: CASCADE
