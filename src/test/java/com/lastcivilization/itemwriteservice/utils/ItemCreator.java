@@ -24,5 +24,6 @@ class ItemCreator {
                 )
                 .type(Type.USE)
                 .build();
+        itemRepository.save(item);
     }
 }
