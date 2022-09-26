@@ -5,9 +5,6 @@ import com.lastcivilization.itemwriteservice.domain.port.ItemRepository;
 import com.lastcivilization.itemwriteservice.domain.view.CreateItemModel;
 import com.lastcivilization.itemwriteservice.domain.view.ItemModel;
 
-import static com.lastcivilization.itemwriteservice.domain.Mapper.toDomain;
-import static com.lastcivilization.itemwriteservice.domain.Mapper.toModel;
-
 public class ItemService {
 
     private final ItemRepository itemRepository;
@@ -17,8 +14,8 @@ public class ItemService {
     }
 
     public ItemModel createItem(CreateItemModel createItemModel) {
-        Item item = toDomain(createItemModel);
-        ItemModel itemModel = toModel(item);
+        Item item = Mapper.toDomain(createItemModel);
+        ItemModel itemModel = Mapper.toModel(item);
         return itemRepository.save(itemModel);
     }
 
@@ -27,9 +24,9 @@ public class ItemService {
         if(notExistsInRepository(id)){
             throw new ItemNotFoundException(id);
         }
-        Item item = toDomain(itemModel);
-        ItemModel itemModelToSave = toModel(item);
-        return itemRepository.save(itemModel);
+        Item item = Mapper.toDomain(itemModel);
+        ItemModel itemModelToSave = Mapper.toModel(item);
+        return itemRepository.save(itemModelToSave);
     }
 
     private boolean notExistsInRepository(long id) {
