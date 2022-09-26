@@ -22,13 +22,13 @@ public class ItemService {
         return itemRepository.save(itemModel);
     }
 
-    public ItemModel updateItem(ItemModel itemModelFromRest) {
-        long id = itemModelFromRest.id();
+    public ItemModel updateItem(ItemModel itemModel) {
+        long id = itemModel.id();
         if(notExistsInRepository(id)){
             throw new ItemNotFoundException(id);
         }
-        Item item = toDomain(itemModelFromRest);
-        ItemModel itemModel = toModel(item);
+        Item item = toDomain(itemModel);
+        ItemModel itemModelToSave = toModel(item);
         return itemRepository.save(itemModel);
     }
 
