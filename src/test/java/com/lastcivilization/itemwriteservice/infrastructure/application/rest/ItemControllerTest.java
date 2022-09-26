@@ -1,17 +1,16 @@
 package com.lastcivilization.itemwriteservice.infrastructure.application.rest;
 
-import com.lastcivilization.itemwriteservice.domain.dto.CreateItemDto;
-import com.lastcivilization.itemwriteservice.domain.dto.DetailsDto;
-import com.lastcivilization.itemwriteservice.domain.dto.ItemDto;
+import com.lastcivilization.itemwriteservice.infrastructure.application.rest.dto.CreateItemDto;
+import com.lastcivilization.itemwriteservice.infrastructure.application.rest.dto.DetailsDto;
+import com.lastcivilization.itemwriteservice.infrastructure.application.rest.dto.ItemDto;
 import com.lastcivilization.itemwriteservice.utils.IntegrationBaseClass;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

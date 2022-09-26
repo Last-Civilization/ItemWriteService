@@ -1,11 +1,9 @@
 package com.lastcivilization.itemwriteservice.domain.port;
 
-import com.lastcivilization.itemwriteservice.domain.Item;
-
-import java.util.Optional;
+import com.lastcivilization.itemwriteservice.domain.view.ItemModel;
 
 public interface ItemRepository {
 
-    Item save(Item item);
+    ItemModel save(ItemModel item);
     boolean existsById(long id);
 }

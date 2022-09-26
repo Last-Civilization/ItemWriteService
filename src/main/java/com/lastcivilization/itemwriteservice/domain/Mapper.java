@@ -1,23 +1,23 @@
 package com.lastcivilization.itemwriteservice.domain;
 
-import com.lastcivilization.itemwriteservice.domain.dto.CreateItemDto;
-import com.lastcivilization.itemwriteservice.domain.dto.DetailsDto;
-import com.lastcivilization.itemwriteservice.domain.dto.ItemDto;
+import com.lastcivilization.itemwriteservice.domain.view.CreateItemModel;
+import com.lastcivilization.itemwriteservice.domain.view.DetailsModel;
+import com.lastcivilization.itemwriteservice.domain.view.ItemModel;
 
 class Mapper {
 
-    static ItemDto toDto(Item item){
+    static ItemModel toModel(Item item){
         Type type = item.getType();
-        return new ItemDto(
+        return new ItemModel(
                 item.getId(),
                 item.getName(),
-                toDto(item.getDetails()),
+                toModel(item.getDetails()),
                 type.toString()
         );
     }
 
-    private static DetailsDto toDto(Details details) {
-        return new DetailsDto(
+    private static DetailsModel toModel(Details details) {
+        return new DetailsModel(
                 details.getId(),
                 details.getResistance(),
                 details.getDamage(),
@@ -30,37 +30,37 @@ class Mapper {
         );
     }
 
-    static Item toDomain(CreateItemDto createItemDto){
+    static Item toDomain(CreateItemModel createItemModel){
         return Item.Builder.anItem()
-                .name(createItemDto.name())
-                .details(detailsToDomain(createItemDto))
-                .type(Type.valueOf(createItemDto.type()))
+                .name(createItemModel.name())
+                .details(detailsToDomain(createItemModel))
+                .type(Type.valueOf(createItemModel.type()))
                 .build();
     }
 
-    private static Details detailsToDomain(CreateItemDto createItemDto){
+    private static Details detailsToDomain(CreateItemModel createItemModel){
         return Details.Builder.aDetails()
-                .resistance(createItemDto.resistance())
-                .damage(createItemDto.damage())
-                .strength(createItemDto.strength())
-                .dexterity(createItemDto.dexterity())
-                .defense(createItemDto.defense())
-                .health(createItemDto.health())
-                .time(createItemDto.time())
-                .lvl(createItemDto.lvl())
+                .resistance(createItemModel.resistance())
+                .damage(createItemModel.damage())
+                .strength(createItemModel.strength())
+                .dexterity(createItemModel.dexterity())
+                .defense(createItemModel.defense())
+                .health(createItemModel.health())
+                .time(createItemModel.time())
+                .lvl(createItemModel.lvl())
                 .build();
     }
 
-    static Item toDomain(ItemDto itemDto){
+    static Item toDomain(ItemModel itemModel){
         return Item.Builder.anItem()
-                .id(itemDto.id())
-                .name(itemDto.name())
-                .details(toDomain(itemDto.details()))
-                .type(Type.valueOf(itemDto.type()))
+                .id(itemModel.id())
+                .name(itemModel.name())
+                .details(toDomain(itemModel.details()))
+                .type(Type.valueOf(itemModel.type()))
                 .build();
     }
 
-    private static Details toDomain(DetailsDto details) {
+    private static Details toDomain(DetailsModel details) {
         return Details.Builder.aDetails()
                 .id(details.id())
                 .resistance(details.resistance())

@@ -1,9 +1,8 @@
 package com.lastcivilization.itemwriteservice.utils;
 
-import com.lastcivilization.itemwriteservice.domain.Details;
-import com.lastcivilization.itemwriteservice.domain.Item;
-import com.lastcivilization.itemwriteservice.domain.Type;
 import com.lastcivilization.itemwriteservice.domain.port.ItemRepository;
+import com.lastcivilization.itemwriteservice.domain.view.DetailsModel;
+import com.lastcivilization.itemwriteservice.domain.view.ItemModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +13,22 @@ class ItemCreator {
     private final ItemRepository itemRepository;
 
     public void resetTestItemDetails() {
-        Item item = Item.Builder.anItem()
-                .id(1L)
-                .name("test")
-                .details(
-                        Details.Builder.aDetails()
-                                .id(1L)
-                                .build()
-                )
-                .type(Type.USE)
-                .build();
+        ItemModel item = new ItemModel(
+                1l,
+                "test",
+                new DetailsModel(
+                        1L,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                ),
+                "USE"
+        );
         itemRepository.save(item);
     }
 }

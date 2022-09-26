@@ -1,6 +1,6 @@
-package com.lastcivilization.itemwriteservice.domain.dto;
+package com.lastcivilization.itemwriteservice.domain.view;
 
-public record DetailsDto(
+public record DetailsModel(
         Long id,
         int resistance,
         int damage,
