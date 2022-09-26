@@ -50,7 +50,7 @@ public class Item {
 
         private Long id;
         private String name;
-        private Details details;
+        private Details details = Details.Builder.aDetails().build();
         private Type type;
 
         private Builder() {
