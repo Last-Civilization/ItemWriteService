@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 import static com.lastcivilization.itemwriteservice.infrastructure.application.rest.RestMapper.MAPPER;
 import static org.springframework.http.HttpStatus.CREATED;
 
@@ -25,14 +27,14 @@ class ItemController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    ItemDto createItem(@RequestBody CreateItemDto createItemDto){
+    ItemDto createItem(@Valid @RequestBody CreateItemDto createItemDto){
         CreateItemModel createItemModel = MAPPER.toModel(createItemDto);
         ItemModel itemModel = itemService.createItem(createItemModel);
         return MAPPER.toDto(itemModel);
     }
 
     @PutMapping
-    ItemDto updateItem(@RequestBody ItemDto itemDto){
+    ItemDto updateItem(@Valid @RequestBody ItemDto itemDto){
         ItemModel itemModel = MAPPER.toModel(itemDto);
         ItemModel updatedItemModel = itemService.updateItem(itemModel);
         return MAPPER.toDto(updatedItemModel);
