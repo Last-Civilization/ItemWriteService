@@ -9,7 +9,7 @@ import javax.validation.constraints.Pattern;
 
 public record ItemDto (
         @Min(1)
-        Long id,
+        long id,
         @NotEmpty
         String name,
         @Valid

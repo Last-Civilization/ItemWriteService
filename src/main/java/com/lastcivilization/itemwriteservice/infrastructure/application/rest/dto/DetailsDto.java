@@ -4,7 +4,7 @@ import javax.validation.constraints.Min;
 
 public record DetailsDto(
         @Min(1)
-        Long id,
+        long id,
         @Min(0)
         int resistance,
         @Min(0)
