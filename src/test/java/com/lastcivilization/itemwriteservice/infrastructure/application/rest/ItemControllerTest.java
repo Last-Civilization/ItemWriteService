@@ -40,25 +40,6 @@ class ItemControllerTest extends IntegrationBaseClass {
                 .andExpect(jsonPath("$.details.lvl").value(1));
     }
 
-    private ItemDto buildItemDto(Long itemId, Long detailsId) {
-        return new ItemDto(
-                itemId,
-                "test",
-                new DetailsDto(
-                        detailsId,
-                        2,
-                        2,
-                        2,
-                        2,
-                        2,
-                        2,
-                        2,
-                        2
-                ),
-                "USE"
-        );
-    }
-
     @NotNull
     private static CreateItemDto buildCreateItemDto() {
         return new CreateItemDto(
@@ -72,6 +53,33 @@ class ItemControllerTest extends IntegrationBaseClass {
                 1,
                 1,
                 "USE"
+        );
+    }
+
+    @Test
+    void shouldReturnValidationExceptionStatusWhileCreatingItem() throws Exception {
+        //given
+        CreateItemDto createItemDto = buildCreateItemDtoWithInvalidDetails();
+        //when
+        ResultActions createResult = mockMvc.perform(post("/items")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(createItemDto)));
+        //then
+        createResult.andExpect(status().isBadRequest());
+    }
+
+    private CreateItemDto buildCreateItemDtoWithInvalidDetails() {
+        return new CreateItemDto(
+                "",
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                "NOTEXISTS"
         );
     }
 
@@ -99,6 +107,25 @@ class ItemControllerTest extends IntegrationBaseClass {
                 .andExpect(jsonPath("$.details.lvl").value(2));
     }
 
+    private ItemDto buildItemDto(Long itemId, Long detailsId) {
+        return new ItemDto(
+                itemId,
+                "test",
+                new DetailsDto(
+                        detailsId,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2
+                ),
+                "USE"
+        );
+    }
+
     @Test
     void shouldReturnItemNotFoundStatusWhileUpdatingItem() throws Exception {
         //given
@@ -109,5 +136,36 @@ class ItemControllerTest extends IntegrationBaseClass {
                 .content(objectMapper.writeValueAsString(itemDto)));
         //then
         updateResult.andExpect(status().isNotFound());
+    }
+
+    @Test
+    void shouldReturnValidationExceptionStatusWhileUpdatingItem() throws Exception {
+        //given
+        ItemDto itemDto = buildItemDtoWithInvalidDetails();
+        //when
+        ResultActions updateResult = mockMvc.perform(put("/items")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(itemDto)));
+        //then
+        updateResult.andExpect(status().isBadRequest());
+    }
+
+    private ItemDto buildItemDtoWithInvalidDetails() {
+        return new ItemDto(
+                0L,
+                "",
+                new DetailsDto(
+                        0L,
+                        -2,
+                        -2,
+                        -2,
+                        -2,
+                        -2,
+                        -2,
+                        -2,
+                        -2
+                ),
+                "NOTEXISTS"
+        );
     }
 }
